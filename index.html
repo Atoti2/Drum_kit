@@ -36,7 +36,7 @@
             border-radius: 5px;
             padding: 15px;
             font-weight: bold;
-            
+            width: 80px;
         }
         .pressed{
             border: 3px solid yellow;
@@ -44,34 +44,26 @@
         }
         span{
             font-size: 1.2rem;
-            color: red  ;
+            color: red;
         }
         
     </style>
 </head>
 <body onkeydown="audio(event)">
-    <div class="container">
-        <div class="keys">
-
-        </div>
-    </div>
-
-
+    <div class="container"><div class="keys"></div></div>
     <script>
         const url = "https://raw.githubusercontent.com/mkatay/json-drums/main/drums"
         const render = (data) => {
             const keys = document.querySelector('.keys')
             data.forEach((item) => {
                 keys.innerHTML += `
-                <div class="key ${item.key}" >
+                <div class="key ${item.key}">
                     <kbd>${item.letter}</kbd>
                     <span>${item.sound}</span>
                     <audio id="${item.key}" src=${item.url}></audio>
-                </div>
-                `
+                </div>`
             })
-        }
-        
+}
         function audio(e){
             const audios = document.querySelectorAll('audio')
             audios.forEach((item) => {
@@ -83,7 +75,6 @@
             }
         })
         }
-        
         getData(url, render)
     </script>
 </body>
