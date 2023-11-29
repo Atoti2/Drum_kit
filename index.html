@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="getData.js"></script>
+    <title>Drum kit</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            background-image: url(https://source.unsplash.com/IW5Bm4rB9OA/);
+            height: 100vh;
+            width: 100vw;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .keys{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .key{
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.5);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            margin: 10px;
+            flex-direction: column;
+            text-align: center;
+            color: black;
+            font-size: 2rem;
+            border-radius: 5px;
+            padding: 15px;
+            font-weight: bold;
+            
+        }
+        .pressed{
+            border: 3px solid yellow;
+            transform: scale(1.1);
+        }
+        span{
+            font-size: 1.2rem;
+            color: red  ;
+        }
+        
+    </style>
+</head>
+<body onkeydown="audio(event)">
+    <div class="container">
+        <div class="keys">
+
+        </div>
+    </div>
+
+
+    <script>
+        const url = "https://raw.githubusercontent.com/mkatay/json-drums/main/drums"
+        const render = (data) => {
+            const keys = document.querySelector('.keys')
+            data.forEach((item) => {
+                keys.innerHTML += `
+                <div class="key ${item.key}" >
+                    <kbd>${item.letter}</kbd>
+                    <span>${item.sound}</span>
+                    <audio id="${item.key}" src=${item.url}></audio>
+                </div>
+                `
+            })
+        }
+        
+        function audio(e){
+            const audios = document.querySelectorAll('audio')
+            audios.forEach((item) => {
+                parent = item.parentElement
+                item.parentElement.classList.contains(e.keyCode) ? parent.classList.add("pressed") : parent.classList.remove("pressed")
+                if(e.keyCode == item.id){
+                let id = e.keyCode   
+                document.getElementById(id).play()
+            }
+        })
+        }
+        
+        getData(url, render)
+    </script>
+</body>
+</html>
