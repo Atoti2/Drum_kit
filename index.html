@@ -98,6 +98,11 @@
             const audios = document.querySelectorAll('audio')
             const emberek = document.querySelector('.emberek')
             const hatter = document.querySelector('.hatter')
+            setTimeout(() => {
+                document.querySelectorAll('.key').forEach((item) => {
+                    item.classList.remove("pressed")
+                })
+            }, 100)
             audios.forEach((item) => {
                 parent = item.parentElement
                 item.parentElement.classList.contains(e.keyCode) ? parent.classList.add("pressed") : parent.classList.remove("pressed")
