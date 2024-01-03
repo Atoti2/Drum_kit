@@ -66,6 +66,13 @@
             transition: all ease-in-out 0.5s;
             z-index: 5;
         }
+
+        @media only screen and (max-width: 800px) {
+            
+            .keys{
+                flex-wrap: wrap;
+            }
+}
     </style>
 </head>
 <body onkeydown="audio(event)">
@@ -94,6 +101,7 @@
             audios.forEach((item) => {
                 parent = item.parentElement
                 item.parentElement.classList.contains(e.keyCode) ? parent.classList.add("pressed") : parent.classList.remove("pressed")
+                
                 if(e.keyCode == item.id){
                     emberek.style.bottom = "0rem"
                     hatter.style.setProperty("--huerotation", "180deg")
